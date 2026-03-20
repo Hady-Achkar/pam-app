@@ -10,7 +10,7 @@ public class PatientRepository(AppDbContext context) : IPatientRepository
         var query = context.Patients.AsNoTracking();
 
         if (!string.IsNullOrWhiteSpace(search))
-            query = query.Where(p => p.FullName.Contains(search));
+            query = query.Where(p => p.FullName.Contains(search, StringComparison.OrdinalIgnoreCase));
 
         return await query
             .Include(p => p.Appointments)

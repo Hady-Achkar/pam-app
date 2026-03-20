@@ -2,13 +2,15 @@
 
 A full stack dental clinic app with .NET Core backend and React Typescript frontend.
 
+https://pam-ca-frontend.happyrock-f82de175.germanywestcentral.azurecontainerapps.io
+
 ## Stack
 
-| Layer | Technologies |
-|-------|-------------|
-| **Backend** | .NET 10, ASP.NET Core, Entity Framework Core (In Memory), xUnit + Moq |
+| Layer        | Technologies                                                                                                |
+| ------------ | ----------------------------------------------------------------------------------------------------------- |
+| **Backend**  | .NET 10, ASP.NET Core, Entity Framework Core (In Memory), xUnit + Moq                                       |
 | **Frontend** | React 19, Typescript, React Router v7, Tanstack Query, React Hook Form, Zod, TailwindCSS, ShadCN UI, Vite 8 |
-| **Infra** | Terraform, GitHub Actions, Docker, Azure Container Apps, Azure Container Registry, Azure Blob Storage |
+| **Infra**    | Terraform, GitHub Actions, Docker, Azure Container Apps, Azure Container Registry, Azure Blob Storage       |
 
 ## Run
 
