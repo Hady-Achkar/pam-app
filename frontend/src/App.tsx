@@ -5,14 +5,13 @@ import { AppLayout } from "@/components/layout/AppLayout";
 import { PatientsPage } from "@/pages/PatientsPage";
 import { PatientDetailPage } from "@/pages/PatientDetailPage";
 
-// don't retry indefinitely
+// retry twice to handle cold starts (backend scales to zero when idle)
 // assume data is fresh for 30 seconds
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
-      retry: 1,
+      retry: 2,
       staleTime: 30 * 1000,
-      refetchOnWindowFocus: false,
     },
   },
 });
