@@ -1,0 +1,29 @@
+@backend_HostAddress = http://localhost:8080
+
+### List patients
+GET {{backend_HostAddress}}/api/patients
+Accept: application/json
+
+### Get patient by ID
+GET {{backend_HostAddress}}/api/patients/{{patientId}}
+Accept: application/json
+
+### Create patient
+POST {{backend_HostAddress}}/api/patients
+Content-Type: application/json
+
+{
+  "name": "Jane Doe",
+  "dateOfBirth": "1990-05-15"
+}
+
+### Create appointment
+POST {{backend_HostAddress}}/api/appointments
+Content-Type: application/json
+
+{
+  "patientId": "{{patientId}}",
+  "dentistId": "{{dentistId}}",
+  "treatmentId": "{{treatmentId}}",
+  "scheduledAt": "2025-12-01T10:00:00Z"
+}

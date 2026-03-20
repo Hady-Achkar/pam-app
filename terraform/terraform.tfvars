@@ -1,0 +1,6 @@
+location           = "germanywestcentral"
+project_name       = "pam"
+acr_name             = "pamappacr"
+storage_account_name = "pamappst"
+backend_image_tag  = "latest"
+frontend_image_tag = "latest"
