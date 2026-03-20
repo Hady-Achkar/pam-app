@@ -45,6 +45,9 @@ public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(op
                   .WithMany()
                   .HasForeignKey(a => a.TreatmentId)
                   .OnDelete(DeleteBehavior.Restrict);
+
+            entity.HasIndex(a => new { a.DentistId, a.ScheduledAt }).IsUnique();
+            entity.HasIndex(a => new { a.PatientId, a.ScheduledAt }).IsUnique();
         });
     }
 

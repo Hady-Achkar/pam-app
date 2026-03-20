@@ -22,6 +22,9 @@ public class AppointmentService(
         var treatment = await treatmentRepository.GetByIdAsync(request.TreatmentId, ct)
             ?? throw new KeyNotFoundException("Treatment not found.");
 
+        if (await appointmentRepository.HasConflictAsync(dentist.Id, request.PatientId, request.ScheduledAt, ct))
+            throw new InvalidOperationException("The dentist or patient already has an appointment at that time.");
+
         var appointment = new Appointment
         {
             Id = Guid.NewGuid(),

@@ -56,6 +56,10 @@ public class AppointmentServiceTests
             .ReturnsAsync(_testTreatment);
 
         _appointmentRepoMock
+            .Setup(r => r.HasConflictAsync(It.IsAny<Guid>(), It.IsAny<Guid>(), It.IsAny<DateTime>(), It.IsAny<CancellationToken>()))
+            .ReturnsAsync(false);
+
+        _appointmentRepoMock
             .Setup(r => r.CreateAsync(It.IsAny<Appointment>(), It.IsAny<CancellationToken>()))
             .ReturnsAsync((Appointment a, CancellationToken _) => a);
     }
@@ -145,6 +149,27 @@ public class AppointmentServiceTests
         };
 
         await Assert.ThrowsAsync<KeyNotFoundException>(() => _sut.CreateAsync(request));
+    }
+
+    [Fact]
+    public async Task CreateAsync_DentistConflict_ThrowsInvalidOperationException()
+    {
+        SetupAllReposValid();
+
+        _appointmentRepoMock
+            .Setup(r => r.HasConflictAsync(It.IsAny<Guid>(), It.IsAny<Guid>(), It.IsAny<DateTime>(), It.IsAny<CancellationToken>()))
+            .ReturnsAsync(true);
+
+        var request = new CreateAppointmentRequest
+        {
+            PatientId = _testPatient.Id,
+            DentistId = _testDentist.Id,
+            TreatmentId = _testTreatment.Id,
+            ScheduledAt = DateTime.UtcNow.AddDays(1)
+        };
+
+        var ex = await Assert.ThrowsAsync<InvalidOperationException>(() => _sut.CreateAsync(request));
+        Assert.Contains("already has an appointment", ex.Message);
     }
 
     [Fact]
