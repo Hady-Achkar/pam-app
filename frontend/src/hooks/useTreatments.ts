@@ -10,7 +10,6 @@ export function useTreatments() {
   } = useQuery({
     queryKey: ["treatments"],
     queryFn: getTreatments,
-    staleTime: Infinity,
   });
 
   return {

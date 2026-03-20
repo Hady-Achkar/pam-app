@@ -90,7 +90,7 @@ resource "azurerm_role_assignment" "frontend_acr_pull" {
   principal_id         = azurerm_user_assigned_identity.frontend_identity.principal_id
 }
 
-# backend container app — can scale to 0 when not in use
+# backend container app — min 1 replica for demo (avoids cold starts)
 resource "azurerm_container_app" "backend" {
   name                         = "${var.project_name}-ca-backend"
   resource_group_name          = azurerm_resource_group.rg.name
@@ -174,7 +174,7 @@ resource "azurerm_container_app" "frontend" {
 
   ingress {
     external_enabled = true
-    target_port      = 80
+    target_port      = 8080
     transport        = "auto"
 
     traffic_weight {

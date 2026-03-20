@@ -16,7 +16,15 @@ export function PatientRow({ patient }: PatientRowProps) {
   return (
     <TableRow
       className="cursor-pointer"
+      tabIndex={0}
+      role="link"
       onClick={() => navigate(`/patients/${patient.id}`)}
+      onKeyDown={(e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          navigate(`/patients/${patient.id}`);
+        }
+      }}
     >
       <TableCell>
         <div className="flex items-center gap-3">

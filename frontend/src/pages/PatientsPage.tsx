@@ -25,6 +25,7 @@ export function PatientsPage() {
 
       <Input
         placeholder="Search patients..."
+        aria-label="Search patients"
         value={search}
         onChange={(e) => setSearch(e.target.value)}
       />

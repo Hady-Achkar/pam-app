@@ -8,7 +8,7 @@ interface AppointmentRowProps {
 }
 
 export function AppointmentRow({ appointment }: AppointmentRowProps) {
-  const past = isPast(appointment.scheduledAt);
+  const past = isPast(appointment.scheduledAt, appointment.treatment.durationMinutes);
 
   return (
     <TableRow className={past ? "opacity-50" : undefined}>
