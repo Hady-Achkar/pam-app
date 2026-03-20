@@ -61,7 +61,7 @@ resource "azurerm_storage_account" "storage" {
 resource "azurerm_storage_container" "photos" {
   name                  = "photos"
   storage_account_id    = azurerm_storage_account.storage.id
-  container_access_type = "private"
+  container_access_type = "blob"
 }
 
 
