@@ -4,7 +4,7 @@ using Azure.Storage.Blobs;
 using Azure.Storage.Blobs.Models;
 
 // assumption: production uses Azure Blob Storage for scalable, CDN-friendly photo hosting.
-// container is created on first upload if it doesn't exist.
+// the "photos" container is provisioned by Terraform — the app only needs read/write blob permissions.
 public class AzureBlobPhotoStorage(BlobServiceClient blobServiceClient) : IPhotoStorage
 {
     private const string ContainerName = "photos";
@@ -12,7 +12,6 @@ public class AzureBlobPhotoStorage(BlobServiceClient blobServiceClient) : IPhoto
     public async Task<string> UploadAsync(Stream stream, string fileName, string contentType, CancellationToken ct = default)
     {
         var containerClient = blobServiceClient.GetBlobContainerClient(ContainerName);
-        await containerClient.CreateIfNotExistsAsync(cancellationToken: ct);
 
         var blobClient = containerClient.GetBlobClient(fileName);
 
