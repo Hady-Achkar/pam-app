@@ -15,11 +15,12 @@ public class AppointmentRepository(AppDbContext context) : IAppointmentRepositor
             .ToListAsync(ct);
     }
 
-    public async Task<bool> HasConflictAsync(Guid dentistId, Guid patientId, DateTime scheduledAt, CancellationToken ct = default)
+    public async Task<bool> HasConflictAsync(Guid dentistId, Guid patientId, DateTime newStart, DateTime newEnd, CancellationToken ct = default)
     {
         return await context.Appointments.AnyAsync(a =>
-            a.ScheduledAt == scheduledAt
-            && (a.DentistId == dentistId || a.PatientId == patientId),
+            (a.DentistId == dentistId || a.PatientId == patientId)
+            && a.ScheduledAt < newEnd
+            && newStart < a.EndAt,
             ct);
     }
 

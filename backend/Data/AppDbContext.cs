@@ -46,6 +46,8 @@ public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(op
                   .HasForeignKey(a => a.TreatmentId)
                   .OnDelete(DeleteBehavior.Restrict);
 
+            entity.Property(a => a.EndAt).IsRequired();
+
             entity.HasIndex(a => new { a.DentistId, a.ScheduledAt }).IsUnique();
             entity.HasIndex(a => new { a.PatientId, a.ScheduledAt }).IsUnique();
         });

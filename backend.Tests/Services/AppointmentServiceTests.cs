@@ -56,7 +56,7 @@ public class AppointmentServiceTests
             .ReturnsAsync(_testTreatment);
 
         _appointmentRepoMock
-            .Setup(r => r.HasConflictAsync(It.IsAny<Guid>(), It.IsAny<Guid>(), It.IsAny<DateTime>(), It.IsAny<CancellationToken>()))
+            .Setup(r => r.HasConflictAsync(It.IsAny<Guid>(), It.IsAny<Guid>(), It.IsAny<DateTime>(), It.IsAny<DateTime>(), It.IsAny<CancellationToken>()))
             .ReturnsAsync(false);
 
         _appointmentRepoMock
@@ -157,7 +157,7 @@ public class AppointmentServiceTests
         SetupAllReposValid();
 
         _appointmentRepoMock
-            .Setup(r => r.HasConflictAsync(It.IsAny<Guid>(), It.IsAny<Guid>(), It.IsAny<DateTime>(), It.IsAny<CancellationToken>()))
+            .Setup(r => r.HasConflictAsync(It.IsAny<Guid>(), It.IsAny<Guid>(), It.IsAny<DateTime>(), It.IsAny<DateTime>(), It.IsAny<CancellationToken>()))
             .ReturnsAsync(true);
 
         var request = new CreateAppointmentRequest

@@ -4,6 +4,7 @@ public class Appointment
 {
     public Guid Id { get; set; }
     public DateTime ScheduledAt { get; set; }
+    public DateTime EndAt { get; set; }
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 
     public Guid PatientId { get; set; }
