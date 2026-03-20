@@ -9,6 +9,7 @@ permissions:
   contents: read
 
 env:
+  # remove ci warnings about node version
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
   ACR_NAME: pamappacr
   RESOURCE_GROUP: pam-rg
